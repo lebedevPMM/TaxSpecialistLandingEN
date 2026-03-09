@@ -1,0 +1,111 @@
+---
+interface Props {
+  services: Array<{
+    title: string;
+    description: string;
+  }>;
+}
+
+const { services } = Astro.props;
+---
+
+<section class="branch-services">
+  <div class="container mx-auto px-4 max-w-4xl py-24">
+    <div class="rv">
+      <span class="section-label">Экспертиза</span>
+      <h2 class="section-heading font-serif">Направления работы</h2>
+    </div>
+
+    <div class="services-list">
+      {services.map((service, i) => (
+        <div class="accordion-item rv" data-accordion>
+          <button class="accordion-header" type="button">
+            <span class="accordion-number font-serif">{String(i + 1).padStart(2, '0')}</span>
+            <span class="accordion-title font-serif">{service.title}</span>
+            <span class="accordion-toggle">+</span>
+          </button>
+          <div class="accordion-body">
+            <p class="accordion-text" set:html={service.description} />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .branch-services {
+    background: var(--bg-alt);
+  }
+
+  .services-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .accordion-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    cursor: pointer;
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: left;
+    color: var(--text);
+    transition: all 0.4s var(--easing-smooth);
+  }
+  .accordion-header:hover {
+    padding-left: 0.5rem;
+  }
+  .accordion-header:hover .accordion-title {
+    color: var(--accent);
+  }
+
+  .accordion-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 400;
+    color: var(--accent);
+    min-width: 3rem;
+    opacity: 0.5;
+  }
+
+  .accordion-title {
+    font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+    font-weight: 400;
+    flex-grow: 1;
+    transition: color 0.3s ease;
+  }
+
+  .accordion-toggle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--accent);
+    margin-left: auto;
+  }
+
+  .accordion-text {
+    padding: 0 0 2rem 4.5rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 1rem;
+    max-width: 40rem;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-accordion]').forEach(item => {
+    const header = item.querySelector('.accordion-header');
+    header?.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('[data-accordion].open').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>

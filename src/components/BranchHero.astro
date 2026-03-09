@@ -1,0 +1,374 @@
+---
+interface Props {
+  title: string;
+  problems: Array<{ id: string; text: string }>;
+  solutions: Array<{ id: string; text: string; links: string[] }>;
+}
+
+const { title, problems, solutions } = Astro.props;
+---
+
+<section class="branch-hero dark-section" id="branch-hero">
+  <!-- Animated mesh gradient background -->
+  <div class="bh-mesh-bg">
+    <div class="mesh-blob mb-1"></div>
+    <div class="mesh-blob mb-2"></div>
+    <div class="mesh-blob mb-3"></div>
+    <div class="mesh-blob mb-4"></div>
+  </div>
+  <div class="bh-mesh-noise"></div>
+
+  <div class="container mx-auto px-4 max-w-6xl">
+    <div class="branch-hero-content">
+      <div class="branch-decor rv" aria-hidden="true"></div>
+      <h1 class="branch-title rv">{title}</h1>
+
+      <div class="ps-grid" id="ps-grid">
+        <!-- Problems column -->
+        <div class="ps-column">
+          <div class="ps-column-label rv">Проблемы</div>
+          {problems.map((p) => (
+            <div class="ps-card ps-card--problem tilt-card rv" data-problem={p.id}>
+              <div class="ps-card-inner">
+                <svg class="ps-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <p class="ps-card-text">{p.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Solutions column -->
+        <div class="ps-column">
+          <div class="ps-column-label ps-column-label--gold rv">Решения</div>
+          {solutions.map((s) => (
+            <div class="ps-card ps-card--solution tilt-card rv" data-solution={s.id} data-links={s.links.join(',')}>
+              <div class="ps-card-inner">
+                <svg class="ps-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+                <p class="ps-card-text">{s.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .branch-hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding: 10rem 0 6rem;
+    background: #000;
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ===== Animated mesh gradient background ===== */
+  .bh-mesh-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    filter: blur(80px) saturate(1.6);
+  }
+
+  .mesh-blob {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+  }
+
+  .mesh-blob.mb-1 {
+    width: 60%;
+    height: 60%;
+    top: -10%;
+    left: -10%;
+    background: radial-gradient(circle, rgba(43, 76, 126, 0.18) 0%, transparent 70%);
+    animation: meshDrift1 12s ease-in-out infinite alternate;
+  }
+
+  .mesh-blob.mb-2 {
+    width: 50%;
+    height: 50%;
+    bottom: -15%;
+    right: -10%;
+    background: radial-gradient(circle, rgba(212, 184, 150, 0.12) 0%, transparent 70%);
+    animation: meshDrift2 15s ease-in-out infinite alternate;
+  }
+
+  .mesh-blob.mb-3 {
+    width: 40%;
+    height: 40%;
+    top: 30%;
+    left: 40%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+    animation: meshDrift3 10s ease-in-out infinite alternate;
+  }
+
+  .mesh-blob.mb-4 {
+    width: 35%;
+    height: 35%;
+    top: 60%;
+    left: 10%;
+    background: radial-gradient(circle, rgba(43, 76, 126, 0.14) 0%, transparent 70%);
+    animation: meshDrift4 18s ease-in-out infinite alternate;
+  }
+
+  .bh-mesh-noise {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    pointer-events: none;
+  }
+
+  @keyframes meshDrift1 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(15%, 10%) scale(1.15); }
+    100% { transform: translate(5%, 20%) scale(1.05); }
+  }
+  @keyframes meshDrift2 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-20%, -10%) scale(1.2); }
+    100% { transform: translate(-10%, 5%) scale(0.95); }
+  }
+  @keyframes meshDrift3 {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+    50% { transform: translate(-15%, 15%) scale(1.3); opacity: 1; }
+    100% { transform: translate(10%, -10%) scale(1.1); opacity: 0.6; }
+  }
+  @keyframes meshDrift4 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20%, -15%) scale(1.1); }
+    100% { transform: translate(-5%, -5%) scale(1.2); }
+  }
+
+  /* ===== Content ===== */
+  .branch-hero-content {
+    position: relative;
+    z-index: 10;
+  }
+
+  .branch-decor {
+    width: 4rem;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--accent-light));
+    margin-bottom: 2.5rem;
+    box-shadow: 0 0 16px rgba(43, 76, 126, 0.4);
+  }
+
+  .branch-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.08;
+    margin-bottom: 3.5rem;
+    text-shadow: 0 0 60px rgba(43, 76, 126, 0.1);
+  }
+
+  /* Two-column grid */
+  .ps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .ps-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ps-column-label {
+    text-transform: uppercase;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  .ps-column-label--gold {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Cards — v6 style */
+  .ps-card {
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+    transition: all 0.5s var(--easing-smooth);
+  }
+
+  .ps-card-inner {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 23px;
+    padding: 1.5rem 1.8rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: all 0.5s var(--easing-smooth);
+  }
+
+  .ps-card-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    stroke: rgba(255, 255, 255, 0.4);
+    transition: stroke 0.4s ease;
+  }
+
+  .ps-card--solution {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%);
+  }
+  .ps-card--solution .ps-card-inner {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .ps-card--solution .ps-card-icon {
+    stroke: rgba(255, 255, 255, 0.5);
+  }
+
+  .ps-card-text {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    transition: color 0.4s ease;
+  }
+
+  /* Hover */
+  .ps-card--problem:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+    transform: rotate(-0.5deg) scale(1.02);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .ps-card--problem:hover .ps-card-inner {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .ps-card--problem:hover .ps-card-text {
+    color: #fff;
+  }
+  .ps-card--problem:hover .ps-card-icon {
+    stroke: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Highlighting mode */
+  .ps-grid.highlighting .ps-card {
+    opacity: 0.2;
+    transform: scale(0.98);
+  }
+  .ps-grid.highlighting .ps-card.active-problem {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .ps-grid.highlighting .ps-card.active-solution {
+    opacity: 1;
+    transform: rotate(-1deg) scale(1.02);
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+    box-shadow: 0 8px 40px rgba(43, 76, 126, 0.2);
+  }
+  .ps-grid.highlighting .ps-card.active-solution .ps-card-inner {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .ps-grid.highlighting .ps-card.active-solution .ps-card-text {
+    color: #fff;
+  }
+  .ps-grid.highlighting .ps-card.active-solution .ps-card-icon {
+    stroke: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .branch-hero { padding: 7rem 0 3rem; min-height: auto; }
+    .ps-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .ps-column { gap: 0.6rem; }
+    .ps-card-inner { padding: 0.9rem 1.1rem; }
+    .ps-card-text { font-size: 0.92rem; line-height: 1.5; }
+    .ps-column-label { margin-bottom: 0.3rem; }
+    .branch-title { margin-bottom: 2rem; }
+  }
+</style>
+
+<script>
+  // ===== Interactive problem-solution highlighting =====
+  const grid = document.getElementById('ps-grid');
+  if (grid) {
+    const problemCards = grid.querySelectorAll('[data-problem]');
+    const solutionCards = grid.querySelectorAll('[data-solution]');
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+    function clearHighlights() {
+      grid!.classList.remove('highlighting');
+      grid!.querySelectorAll('.active-problem, .active-solution').forEach(el => {
+        el.classList.remove('active-problem', 'active-solution');
+      });
+    }
+
+    function highlightProblem(card: Element) {
+      const problemId = (card as HTMLElement).dataset.problem!;
+      clearHighlights();
+      grid!.classList.add('highlighting');
+      card.classList.add('active-problem');
+
+      let firstSolution: Element | null = null;
+      solutionCards.forEach(sol => {
+        const links = (sol as HTMLElement).dataset.links?.split(',') || [];
+        if (links.includes(problemId)) {
+          sol.classList.add('active-solution');
+          if (!firstSolution) firstSolution = sol;
+        }
+      });
+
+      // On mobile, scroll the first matching solution into view
+      if (isMobile && firstSolution) {
+        setTimeout(() => {
+          (firstSolution as Element).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    }
+
+    if (isMobile) {
+      // Mobile: click to toggle
+      problemCards.forEach(card => {
+        card.addEventListener('click', () => {
+          if (card.classList.contains('active-problem')) {
+            clearHighlights();
+          } else {
+            highlightProblem(card);
+          }
+        });
+      });
+      // Tap outside to clear
+      document.addEventListener('click', (e) => {
+        if (!(e.target as Element).closest('.ps-card')) {
+          clearHighlights();
+        }
+      });
+    } else {
+      // Desktop: hover
+      problemCards.forEach(card => {
+        card.addEventListener('mouseenter', () => highlightProblem(card));
+        card.addEventListener('mouseleave', () => clearHighlights());
+      });
+    }
+  }
+</script>

@@ -1,0 +1,86 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const words = text.split(/\s+/);
+---
+
+<div class="text-reveal-wrap" id="textRevealWrap">
+  <section class="text-reveal-section">
+    <p class="text-reveal-text" id="textRevealText">
+      {words.map((word) => (
+        <span class="tr-word">{word} </span>
+      ))}
+    </p>
+  </section>
+</div>
+
+<style>
+  .text-reveal-wrap {
+    height: 250vh;
+    position: relative;
+  }
+
+  .text-reveal-section {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 clamp(2rem, 8vw, 10rem);
+  }
+
+  .text-reveal-text {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.4;
+    text-align: center;
+    max-width: 900px;
+    margin: 0;
+  }
+
+  .tr-word {
+    color: var(--text-dim);
+    transition: color 0.4s var(--easing-smooth);
+    display: inline;
+  }
+
+  .tr-word.active {
+    color: var(--text);
+  }
+</style>
+
+<script>
+  const gsap = (window as any).gsap;
+  const ScrollTrigger = (window as any).ScrollTrigger;
+
+  if (gsap && ScrollTrigger) {
+    const wrap = document.getElementById('textRevealWrap');
+    const words = document.querySelectorAll('.tr-word');
+
+    if (wrap && words.length) {
+      ScrollTrigger.create({
+        trigger: wrap,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1,
+        onUpdate: (self: any) => {
+          const progress = self.progress;
+          const activeIndex = Math.floor(progress * words.length);
+
+          words.forEach((word, i) => {
+            if (i <= activeIndex) {
+              word.classList.add('active');
+            } else {
+              word.classList.remove('active');
+            }
+          });
+        }
+      });
+    }
+  }
+</script>

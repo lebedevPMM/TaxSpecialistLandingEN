@@ -1,0 +1,432 @@
+---
+---
+
+<section id="geography" class="geo-section">
+  <!-- Gradient background instead of image -->
+  <div class="geo-gradient"></div>
+  <!-- ghost text removed -->
+
+  <!-- Dotted wireframe globe (decorative background) -->
+  <div class="geo-globe-wrap">
+    <canvas id="geo-globe-canvas"></canvas>
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="text-center mb-16 rv">
+      <h2 class="geo-heading">
+        Geographic Coverage <span class="geo-accent">and Partnerships</span>
+      </h2>
+    </div>
+
+    <!-- Russia (highlighted, first) -->
+    <div class="w-full mb-8 rv">
+      <div class="geo-card geo-card--primary">
+        <div class="geo-dot geo-dot--lg"></div>
+        <div>
+          <div class="geo-country">Russia</div>
+          <p class="geo-desc">Asset repatriation, removal of segregation from Type "C" accounts, interaction with issuers and the Government Commission</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other countries -->
+    <div class="w-full rv">
+      <div class="geo-grid">
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm">Cyprus</div>
+            <p class="geo-desc-sm">Corporate structuring, redomiciliation, residence permits and tax incentives</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm">Belgium &amp; Luxembourg</div>
+            <p class="geo-desc-sm">Licensing procedures with <abbr title="International Central Securities Depository (Belgium)">Euroclear</abbr> and <abbr title="International Central Securities Depository (Luxembourg)">Clearstream</abbr> for asset transfers</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm">France</div>
+            <p class="geo-desc-sm">Licenses for sanctioned payment transactions</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm">Switzerland</div>
+            <p class="geo-desc-sm">Regulatory approvals for asset transfers</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm">United Kingdom</div>
+            <p class="geo-desc-sm">Trust structures, licensing, migration and investment mechanisms</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm">Spain</div>
+            <p class="geo-desc-sm">Migration and investment programs, residence permits</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm">Romania</div>
+            <p class="geo-desc-sm">Migration and investment programs, residence permits</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm">Turkey</div>
+            <p class="geo-desc-sm">Migration and banking mechanisms, business operations and debt recovery</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm">Latvia</div>
+            <p class="geo-desc-sm">Migration and investment mechanisms</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm">Moldova</div>
+            <p class="geo-desc-sm">Migration and investment mechanisms</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm"><abbr title="British Virgin Islands">BVI</abbr>, Panama, Seychelles</div>
+            <p class="geo-desc-sm">Corporate governance and offshore structuring</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <div class="geo-dot"></div>
+          <div>
+            <div class="geo-country-sm"><abbr title="United Arab Emirates">UAE</abbr></div>
+            <p class="geo-desc-sm">Company formation, banking solutions and migration mechanisms</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .geo-section {
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .geo-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 50%, rgba(43, 76, 126, 0.06) 0%, transparent 70%);
+    z-index: 0;
+  }
+
+  /* Globe background */
+  .geo-globe-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: 0.85;
+    pointer-events: none;
+    width: 600px;
+    height: 600px;
+  }
+  .geo-globe-wrap canvas {
+    width: 100%;
+    height: 100%;
+  }
+  @media (max-width: 768px) {
+    .geo-globe-wrap {
+      width: 350px;
+      height: 350px;
+      opacity: 0.35;
+    }
+  }
+
+  .geo-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    line-height: 1.15;
+  }
+
+  .geo-accent {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Primary card (Russia) */
+  .geo-card--primary {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: rgba(43, 76, 126, 0.04);
+    border: 1px solid rgba(43, 76, 126, 0.15);
+    border-radius: 24px;
+    padding: 1.5rem 2rem;
+    transition: all 0.4s var(--easing-smooth);
+  }
+
+  .geo-card--primary:hover {
+    border-color: rgba(43, 76, 126, 0.4);
+    background: rgba(43, 76, 126, 0.06);
+  }
+
+  .geo-dot {
+    width: 10px;
+    height: 10px;
+    margin-top: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .geo-dot--lg {
+    width: 12px;
+    height: 12px;
+    box-shadow: 0 0 12px rgba(43, 76, 126, 0.5);
+  }
+
+  .geo-country {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+  .geo-desc {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* Grid of countries */
+  .geo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem 2.5rem;
+  }
+
+  .geo-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .geo-country-sm {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  .geo-country-sm abbr {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .geo-desc-sm {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: rgba(42, 38, 34, 0.7);
+    line-height: 1.6;
+  }
+  .geo-desc-sm abbr {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  @media (max-width: 1024px) {
+    .geo-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .geo-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+    .geo-card--primary { padding: 1.2rem 1.4rem; }
+  }
+</style>
+
+<script>
+  // ===== Dotted wireframe globe (d3 + canvas) =====
+  const d3lib = (window as any).d3;
+
+  if (d3lib) {
+    const canvas = document.getElementById('geo-globe-canvas') as HTMLCanvasElement;
+    if (canvas) {
+      const context = canvas.getContext('2d');
+      if (context) {
+        const size = 600;
+        const radius = size / 2.5;
+
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = size * dpr;
+        canvas.height = size * dpr;
+        canvas.style.width = `${size}px`;
+        canvas.style.height = `${size}px`;
+        context.scale(dpr, dpr);
+
+        const projection = d3lib.geoOrthographic()
+          .scale(radius)
+          .translate([size / 2, size / 2])
+          .clipAngle(90);
+
+        const path = d3lib.geoPath().projection(projection).context(context);
+
+        // Colors for light background — more contrast
+        const accentColor = 'rgba(43, 76, 126, 0.9)';   // mauve accent
+        const gridColor = 'rgba(42, 38, 34, 0.12)';        // warm grid
+        const dotColor = 'rgba(43, 76, 126, 0.7)';       // land dots
+        const outlineColor = 'rgba(42, 38, 34, 0.3)';      // land outlines
+        const globeStroke = 'rgba(42, 38, 34, 0.18)';      // globe border
+
+        interface DotData { lng: number; lat: number; }
+        const allDots: DotData[] = [];
+        let landFeatures: any = null;
+
+        // Point-in-polygon test
+        const pointInPolygon = (point: [number, number], polygon: number[][]): boolean => {
+          const [x, y] = point;
+          let inside = false;
+          for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+            const [xi, yi] = polygon[i];
+            const [xj, yj] = polygon[j];
+            if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) {
+              inside = !inside;
+            }
+          }
+          return inside;
+        };
+
+        const pointInFeature = (point: [number, number], feature: any): boolean => {
+          const geom = feature.geometry;
+          if (geom.type === 'Polygon') {
+            if (!pointInPolygon(point, geom.coordinates[0])) return false;
+            for (let i = 1; i < geom.coordinates.length; i++) {
+              if (pointInPolygon(point, geom.coordinates[i])) return false;
+            }
+            return true;
+          } else if (geom.type === 'MultiPolygon') {
+            for (const polygon of geom.coordinates) {
+              if (pointInPolygon(point, polygon[0])) {
+                let inHole = false;
+                for (let i = 1; i < polygon.length; i++) {
+                  if (pointInPolygon(point, polygon[i])) { inHole = true; break; }
+                }
+                if (!inHole) return true;
+              }
+            }
+          }
+          return false;
+        };
+
+        const generateDots = (feature: any, spacing = 18) => {
+          const dots: [number, number][] = [];
+          const bounds = d3lib.geoBounds(feature);
+          const [[minLng, minLat], [maxLng, maxLat]] = bounds;
+          const step = spacing * 0.08;
+          for (let lng = minLng; lng <= maxLng; lng += step) {
+            for (let lat = minLat; lat <= maxLat; lat += step) {
+              const pt: [number, number] = [lng, lat];
+              if (pointInFeature(pt, feature)) dots.push(pt);
+            }
+          }
+          return dots;
+        };
+
+        // Render function
+        const render = () => {
+          context.clearRect(0, 0, size, size);
+
+          // Globe circle
+          context.beginPath();
+          context.arc(size / 2, size / 2, projection.scale(), 0, 2 * Math.PI);
+          context.fillStyle = 'rgba(43, 76, 126, 0.06)';
+          context.fill();
+          context.strokeStyle = globeStroke;
+          context.lineWidth = 1.5;
+          context.stroke();
+
+          if (landFeatures) {
+            // Graticule
+            const graticule = d3lib.geoGraticule();
+            context.beginPath();
+            path(graticule());
+            context.strokeStyle = gridColor;
+            context.lineWidth = 0.5;
+            context.stroke();
+
+            // Land outlines
+            context.beginPath();
+            landFeatures.features.forEach((f: any) => path(f));
+            context.strokeStyle = outlineColor;
+            context.lineWidth = 0.8;
+            context.stroke();
+
+            // Land dots
+            allDots.forEach((dot) => {
+              const projected = projection([dot.lng, dot.lat]);
+              if (projected && projected[0] >= 0 && projected[0] <= size && projected[1] >= 0 && projected[1] <= size) {
+                context.beginPath();
+                context.arc(projected[0], projected[1], 1, 0, 2 * Math.PI);
+                context.fillStyle = dotColor;
+                context.fill();
+              }
+            });
+          }
+        };
+
+        // Load world data
+        const loadData = async () => {
+          try {
+            const res = await fetch(
+              'https://raw.githubusercontent.com/martynafford/natural-earth-geojson/refs/heads/master/110m/physical/ne_110m_land.json'
+            );
+            if (!res.ok) return;
+            landFeatures = await res.json();
+            landFeatures.features.forEach((feature: any) => {
+              generateDots(feature, 18).forEach(([lng, lat]) => {
+                allDots.push({ lng, lat });
+              });
+            });
+            render();
+          } catch (e) {
+            // Graceful fail — just no globe
+          }
+        };
+
+        // Auto-rotation
+        const rotation: [number, number] = [0, -15]; // Start tilted to show Russia/Europe
+        const rotationSpeed = 0.3;
+
+        const timer = d3lib.timer(() => {
+          rotation[0] += rotationSpeed;
+          projection.rotate(rotation);
+          render();
+        });
+
+        loadData();
+
+        // Cleanup on navigation (Astro view transitions)
+        document.addEventListener('astro:before-swap', () => timer.stop(), { once: true });
+      }
+    }
+  }
+</script>

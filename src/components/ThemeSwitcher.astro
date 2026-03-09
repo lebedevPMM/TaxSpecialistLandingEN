@@ -1,0 +1,171 @@
+---
+const themes = [
+  { id: 'burgundy', name: 'Burgundy Classic', color: '#800020', dark: false },
+  { id: 'midnight', name: 'Midnight Editorial', color: '#3A82FF', dark: true },
+  { id: 'terracotta', name: 'Warm Terracotta', color: '#C4704B', dark: false },
+  { id: 'arctic', name: 'Arctic', color: '#64B5C6', dark: false },
+  { id: 'forest', name: 'Deep Forest', color: '#B87333', dark: true },
+  { id: 'noir', name: 'Navy & Sand', color: '#2B4C7E', dark: true },
+  { id: 'rose', name: 'Dusty Rose', color: '#B8860B', dark: false },
+  { id: 'ink', name: 'Ink & Paper', color: '#000000', dark: false },
+  { id: 'navy', name: 'Navy Diplomat', color: '#8B9DAF', dark: false },
+  { id: 'espresso', name: 'Espresso', color: '#D4A574', dark: true },
+  { id: 'sage', name: 'Sage & Stone', color: '#7D8B6A', dark: false },
+  { id: 'crimson', name: 'Crimson Bold', color: '#CC2936', dark: false },
+];
+---
+
+<div class="theme-switcher" id="theme-switcher">
+  <button class="theme-switcher-toggle" id="theme-toggle" aria-label="Toggle theme panel">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+  </button>
+  <div class="theme-dots" id="theme-dots">
+    {themes.map((theme) => (
+      <button
+        class="theme-dot"
+        data-theme-id={theme.id}
+        data-dark={theme.dark ? 'true' : 'false'}
+        style={`background-color: ${theme.color}`}
+        aria-label={theme.name}
+        title={theme.name}
+      />
+    ))}
+  </div>
+</div>
+
+<style>
+  .theme-switcher {
+    position: fixed;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .theme-switcher-toggle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--text-muted);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .theme-switcher-toggle:hover {
+    opacity: 1;
+    transform: rotate(45deg);
+  }
+
+  .theme-dots {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 6px;
+    background: var(--surface);
+    border: 1px solid var(--text-muted);
+    border-radius: 20px;
+    opacity: 0;
+    transform: translateX(10px);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .theme-dots.visible {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+
+  .theme-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    padding: 0;
+  }
+  .theme-dot:hover {
+    transform: scale(1.3);
+  }
+  .theme-dot.active {
+    border-color: var(--text);
+    transform: scale(1.2);
+    box-shadow: 0 0 0 2px var(--surface);
+  }
+
+  @media (max-width: 768px) {
+    .theme-switcher {
+      right: 0.5rem;
+      top: auto;
+      bottom: 1rem;
+      transform: none;
+      flex-direction: column-reverse;
+    }
+    .theme-dots {
+      transform: translateY(10px);
+    }
+    .theme-dots.visible {
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  const darkThemes = ['midnight', 'forest', 'noir', 'espresso'];
+
+  function setTheme(id: string) {
+    document.documentElement.setAttribute('data-theme', id);
+    document.documentElement.classList.toggle('dark-theme', darkThemes.includes(id));
+    localStorage.setItem('theme', id);
+    document.querySelectorAll('.theme-dot').forEach(d => {
+      (d as HTMLElement).classList.toggle('active', (d as HTMLElement).dataset.themeId === id);
+    });
+  }
+
+  // Toggle panel
+  const toggle = document.getElementById('theme-toggle');
+  const dots = document.getElementById('theme-dots');
+  toggle?.addEventListener('click', () => {
+    dots?.classList.toggle('visible');
+  });
+
+  // Theme dots click
+  document.querySelectorAll('.theme-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      const id = (dot as HTMLElement).dataset.themeId;
+      if (id) setTheme(id);
+    });
+  });
+
+  // Apply saved theme
+  const saved = localStorage.getItem('theme') || 'burgundy';
+  setTheme(saved);
+
+  // Close panel on outside click
+  document.addEventListener('click', (e) => {
+    const switcher = document.getElementById('theme-switcher');
+    if (switcher && !switcher.contains(e.target as Node)) {
+      dots?.classList.remove('visible');
+    }
+  });
+</script>

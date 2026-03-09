@@ -1,0 +1,168 @@
+---
+---
+
+<section class="benefits-section rv">
+  <div class="container mx-auto px-4 max-w-[1500px]">
+    <h2 class="benefits-heading rv">
+      How the Expert Adds Value <span class="benefits-accent">and&nbsp;When Expertise Is Required</span>
+    </h2>
+
+    <div class="benefits-grid">
+      <div class="ben-card rv">
+        <h3 class="ben-title">Investment Structuring</h3>
+        <p class="ben-text">Designing personal, corporate and contractual structures aligned with the client's strategic objectives, taking into account taxation, currency control and practical compliance requirements.</p>
+      </div>
+
+      <div class="ben-card rv">
+        <h3 class="ben-title">Cross-Border Structures</h3>
+        <p class="ben-text">Advising where a project extends beyond a single jurisdiction: building an integrated legal framework across multiple countries while addressing local regulatory considerations.</p>
+      </div>
+
+      <div class="ben-card rv">
+        <h3 class="ben-title">Sanctions &amp;&nbsp;Verification</h3>
+        <p class="ben-text">Navigating regulatory bottlenecks&nbsp;—&nbsp;from updating verification documentation to obtaining approvals and licenses in relevant jurisdictions.</p>
+      </div>
+
+      <div class="ben-card rv">
+        <h3 class="ben-title">Negotiations &amp; Representation</h3>
+        <p class="ben-text">Managing communication with government authorities, financial institutions and counterparties, supporting the process through to a practical outcome.</p>
+      </div>
+
+      <div class="ben-card ben-card--wide rv">
+        <div class="ben-wide-inner">
+          <h3 class="ben-title ben-title--wide">Asset Protection &amp;&nbsp;Restoration of Control</h3>
+          <p class="ben-text ben-text--wide">Advising in situations where investors have already encountered asset freezes, loss of control over <abbr title="Controlled Foreign Companies">CFCs</abbr>, or refusals from banks or custodians.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .benefits-section {
+    padding: 5rem 0;
+    background: var(--bg);
+  }
+
+  .benefits-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+  .benefits-accent {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* ===== Bento Grid: 4 equal + 1 full-width ===== */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .ben-card {
+    background: rgba(43, 76, 126, 0.03);
+    border: 1px solid rgba(43, 76, 126, 0.1);
+    border-radius: 24px;
+    padding: 2rem 1.6rem;
+    transition: all 0.4s var(--easing-smooth);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ben-card:hover {
+    border-color: rgba(43, 76, 126, 0.3);
+    background: rgba(43, 76, 126, 0.05);
+    transform: translateY(-2px);
+  }
+
+  /* Wide card spans all 4 columns */
+  .ben-card--wide {
+    grid-column: 1 / -1;
+    background: rgba(43, 76, 126, 0.05);
+    border-color: rgba(43, 76, 126, 0.15);
+    padding: 2.5rem 3rem;
+  }
+  .ben-card--wide:hover {
+    background: rgba(43, 76, 126, 0.08);
+    border-color: rgba(43, 76, 126, 0.35);
+  }
+
+  .ben-wide-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .ben-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+  }
+  .ben-card:hover .ben-title {
+    color: var(--accent);
+  }
+
+  .ben-title--wide {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+  }
+
+  .ben-text {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .ben-text abbr {
+    text-decoration: none;
+    color: var(--text-muted);
+  }
+
+  .ben-text--wide {
+    font-size: 1rem;
+  }
+
+  /* ===== Tablet: 2 columns ===== */
+  @media (max-width: 1024px) {
+    .benefits-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .ben-card--wide {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* ===== Mobile: 1 column ===== */
+  @media (max-width: 768px) {
+    .benefits-section {
+      padding: 3.5rem 0;
+    }
+    .benefits-heading {
+      margin-bottom: 2rem;
+    }
+    .benefits-grid {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+    .ben-card {
+      padding: 1.5rem 1.3rem;
+    }
+    .ben-card--wide {
+      padding: 1.8rem 1.5rem;
+    }
+    .ben-wide-inner {
+      text-align: left;
+    }
+  }
+</style>

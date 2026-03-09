@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HeroMain from '../components/HeroMain.astro';
+import Marquee from '../components/Marquee.astro';
+import Benefits from '../components/Benefits.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Investment Counsel | Capital Protection and Cross-Border Structuring"
+  description="Securities, international tax, corporate law. Advising investors and family offices on capital protection and regulatory navigation."
+>
+  <Header />
+  <main>
+    <HeroMain />
+
+    <Marquee items={[
+      "International Law",
+      "Sanctions",
+      "Tax Planning",
+      "Asset Unblocking",
+      "Due Diligence",
+      "Compliance",
+      "Restructuring"
+    ]} />
+
+    <Benefits />
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<Layout title="About the Expert | Investment Counsel" description="Vasile Lupu — international tax and investment lawyer with over 15 years of experience in cross-border advisory and securities unblocking.">
+  <Header />
+
+  <main class="expert-page">
+    <div class="container mx-auto px-4">
+
+      <div class="expert-layout">
+
+        <!-- Photo Column -->
+        <div class="expert-photo-col rv">
+          <div class="expert-photo-wrap">
+            <img src="/TaxSpecialistLandingEN/DM2A7038.jpg" alt="Investment Counsel" class="expert-photo" />
+          </div>
+          <div class="expert-photo-decor"></div>
+        </div>
+
+        <!-- Content Column -->
+        <div class="expert-content">
+
+          <!-- Intro -->
+          <div class="rv">
+            <h1 class="expert-heading">
+              About the <span class="expert-heading-accent">Expert</span>
+            </h1>
+            <p class="expert-name">Vasile Lupu</p>
+            <p class="expert-intro">
+              International tax and investment lawyer with <strong>over 15&nbsp;years of&nbsp;experience</strong> advising private investors, entrepreneurs and family offices on complex cross-border asset structures and regulatory matters.
+            </p>
+          </div>
+
+          <div class="expert-divider"></div>
+
+          <!-- Core Specialization -->
+          <div class="rv">
+            <h2 class="expert-section-title">Core Specialization</h2>
+            <p class="expert-text">
+              Tax and corporate advisory focused on restoring operational and legal control over international asset structures. Direct representation of&nbsp;clients before tax authorities, financial institutions and regulators across multiple jurisdictions, including obtaining approvals required for the sale and transfer of&nbsp;securities into the Russian jurisdiction. Advisory on removal of&nbsp;asset segregation on Type&nbsp;"C" accounts.
+            </p>
+          </div>
+
+          <!-- Track Record -->
+          <div class="rv">
+            <h2 class="expert-section-title">Track Record</h2>
+            <p class="expert-text">
+              Advised on the unblocking of assets and restoration of control over international corporate structures exceeding <strong>RUB&nbsp;5&nbsp;billion</strong>. Successfully represented Russian investors in restoring control over foreign legal entities, bank accounts and securities across Europe and other jurisdictions.
+            </p>
+            <p class="expert-text" style="margin-top: 0.8rem;">
+              Extensive experience obtaining individual licenses from <abbr title="International Central Securities Depository (Belgium)">Euroclear</abbr>, <abbr title="International Central Securities Depository (Luxembourg)">Clearstream</abbr> and <abbr title="Office of Foreign Assets Control (USA)">OFAC</abbr> required for securities transfers and transactions. Regular interaction with the <abbr title="National Settlement Depository">NSD</abbr> and the Government Commission of the Russian Federation within the framework of Presidential Decrees No.&nbsp;95, 138, 198, 520, 844 and related regulations.
+            </p>
+          </div>
+
+          <!-- Expertise -->
+          <div class="rv">
+            <h2 class="expert-section-title">Expertise</h2>
+            <p class="expert-text">
+              International tax planning and cross-border structuring, <abbr title="Controlled Foreign Companies">CFC</abbr> compliance and reporting, <strong>45+ corporate restructurings</strong> across multiple jurisdictions, participation in M&amp;A transactions involving assets exceeding <strong>USD&nbsp;400&nbsp;million</strong>, structuring international payments between Russia and the EU under current regulatory constraints including KYC verification standards, AML compliance, automatic exchange of information and international tax reporting requirements.
+            </p>
+          </div>
+
+          <!-- Operating Model -->
+          <div class="rv">
+            <h2 class="expert-section-title">Operating Model</h2>
+            <p class="expert-text">
+              Each engagement is supported by a coordinated network of local advisors — tax professionals, lawyers, banking specialists, compliance experts and international partners. The approach focuses on practical execution, risk management and measurable outcomes, delivering integrated turnkey solutions for capital protection and cross-border operations.
+            </p>
+          </div>
+
+          <!-- Professional Background -->
+          <div class="rv">
+            <h2 class="expert-section-title">Professional Background</h2>
+            <p class="expert-text">
+              Vasile began his legal career at Lomonosov Moscow State University and in international consulting firms of the Big Four, later leading tax practices within Russian corporate groups. He currently advises several <abbr title="Family Office">family offices</abbr> with assets and business interests across Russia, the EU, the <abbr title="British Virgin Islands">BVI</abbr> and the UAE.
+            </p>
+          </div>
+
+          <div class="rv">
+            <a href="#cta" class="btn-hero">Get in Touch</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <CTA />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .expert-page {
+    padding-top: 8rem;
+    background: var(--bg);
+    position: relative;
+  }
+  /* Dark gradient at top so white header text is readable over mixed bg */
+  .expert-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10rem;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    z-index: 40;
+    pointer-events: none;
+  }
+
+  .expert-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  /* Photo */
+  .expert-photo-col {
+    position: relative;
+  }
+  .expert-photo-wrap {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+  .expert-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    filter: grayscale(30%);
+    transition: filter 0.7s var(--easing-smooth);
+  }
+  .expert-photo-wrap:hover .expert-photo {
+    filter: grayscale(0%);
+  }
+  .expert-photo-decor {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(43, 76, 126, 0.15);
+    border-radius: 24px;
+    z-index: -1;
+  }
+
+  /* Content */
+  .expert-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+
+  .expert-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .expert-heading-accent {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .expert-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .expert-intro {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .expert-intro strong {
+    color: var(--text);
+  }
+
+  .expert-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .expert-section-title {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .expert-text {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .expert-text strong {
+    color: var(--text);
+  }
+  .expert-text abbr {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .expert-page { padding-top: 6rem; }
+    .expert-layout {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .expert-photo-decor { display: none; }
+  }
+</style>
