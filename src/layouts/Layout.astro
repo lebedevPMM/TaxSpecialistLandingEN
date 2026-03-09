@@ -14,12 +14,17 @@ import "@fontsource/instrument-serif/400-italic.css";
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
 }
 
 const {
   title,
-  description = "Advising private investors, entrepreneurs and family offices on capital protection, cross-border structuring and regulatory navigation."
+  description = "Advising private investors, entrepreneurs and family offices on capital protection, cross-border structuring and regulatory navigation.",
+  ogImage = "/TaxSpecialistLandingEN/hero3.jpg"
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, "https://lebedevpmm.github.io");
+const ogImageURL = new URL(ogImage, "https://lebedevpmm.github.io").href;
 ---
 
 <!doctype html>
@@ -32,15 +37,61 @@ const {
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <!-- GSAP + ScrollTrigger -->
-    <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-    <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL.href} />
 
-    <!-- Lenis smooth scroll -->
-    <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:locale" content="en_US" />
 
-    <!-- D3.js for globe visualization -->
-    <script is:inline src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "name": "Investment Lawyer",
+          "description": "Capital protection in a sanctions-driven and highly regulated international environment.",
+          "url": "https://lebedevpmm.github.io/TaxSpecialistLandingEN/",
+          "areaServed": ["Russia", "Cyprus", "Belgium", "Luxembourg", "France", "Switzerland", "United Kingdom", "Spain", "Turkey", "UAE"],
+          "serviceType": ["International Tax Advisory", "Securities Law", "Corporate Law", "Cross-Border Structuring"],
+          "knowsLanguage": ["en", "ru"],
+          "founder": {
+            "@type": "Person",
+            "name": "Vasile Lupu",
+            "jobTitle": "International Tax and Investment Lawyer",
+            "description": "Over 15 years of experience advising private investors, entrepreneurs and family offices on cross-border asset structures.",
+            "alumniOf": { "@type": "CollegeOrUniversity", "name": "Lomonosov Moscow State University" },
+            "knowsAbout": ["International Tax Law", "Securities", "Corporate Restructuring", "Sanctions Compliance"]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "name": "Investment Lawyer",
+          "url": "https://lebedevpmm.github.io/TaxSpecialistLandingEN/"
+        }
+      ]
+    })} />
+
+    <!-- GSAP + ScrollTrigger (deferred) -->
+    <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
+
+    <!-- Lenis smooth scroll (deferred) -->
+    <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+
+    <!-- D3.js for globe visualization (deferred) -->
+    <script is:inline src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" defer></script>
   </head>
 
   <body class="font-sans antialiased min-h-screen flex flex-col" style="background-color: var(--bg); color: var(--text);">
